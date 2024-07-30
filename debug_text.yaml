@@ -5,14 +5,18 @@
   become: yes
   become_user: root
   become_method: sudo
+
+  vars:
+    debug_msg: "{{ morpheus['debugMsg'] }}"
+  
   tasks:
   - name: Debug Message 
     debug:
-      msg: 'DEBUG TEXT :'
+      msg: 'DEBUG TEXT : {{ debug_msg }}'
   - name: Create Debug Text File
     ansible.builtin.lineinfile:
       path: /DEBUG.txt
       state: present
       search_string: 'DEBUG TEXT'
-      line: 'DEBUG TEXT :'
+      line: 'DEBUG TEXT : {{ debug_msg }}'
       mode: 0664
