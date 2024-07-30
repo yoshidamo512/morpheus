@@ -1,0 +1,18 @@
+---
+- name: This sets up an mysql master server
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+  - name: Debug Message 
+    debug:
+      msg: 'DEBUG TEXT :'
+  - name: Create Debug Text File
+    ansible.builtin.lineinfile:
+      path: /DEBUG.txt
+      state: present
+      search_string: 'DEBUG TEXT'
+      line: 'DEBUG TEXT :'
+      mode: 0664
